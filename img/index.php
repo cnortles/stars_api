@@ -6,20 +6,27 @@ if (isset($img_type)) {
 		//获取USER AGENT
 		$agent = strtolower($_SERVER['HTTP_USER_AGENT']);
 		//分析数据	
-		$is_pc = (strpos($agent, 'windows nt')) ? true : false;	
-		$is_iphone = (strpos($agent, 'iphone')) ? true : false;	
-		$is_ipad = (strpos($agent, 'ipad')) ? true : false;	
-		$is_android = (strpos($agent, 'android')) ? true : false;
-		$is_linux = (strpos($agent, 'linux')) ? true : false;	
+		$is_pc = (stripos($agent, 'windows nt')) ? true : false;	
+		$is_iphone = (stripos($agent, 'iphone')) ? true : false;	
+		$is_ipad = (stripos($agent, 'ipad')) ? true : false;	
+		$is_android = (stripos($agent, 'android')) ? true : false;
+		$is_linux = (stripos($agent, 'linux')) ? true : false;	
+		$is_harmonyOS = (stripos($agent, 'harmonyOS')) ? true : false;
 		//输出数据	
-		if($is_linux){
+		if($is_linux && $is_android){
+			img($img_type."/mobile.txt");	
+		}
+		if($is_linux && $is_harmonyOS){
+			img($img_type."/mobile.txt");	
+		}		
+		if($is_linux && !$is_android && !$is_harmonyOS){
 			img($img_type."/pc.txt");	
 		}	
 		if($is_pc){
 			img($img_type."/pc.txt");	
 		}	
 		if($is_iphone){	
-			img($img_type."mobile.txt");	
+			img($img_type."/mobile.txt");	
 		}	
 		if($is_ipad){
 			img($img_type."/mobile.txt");
